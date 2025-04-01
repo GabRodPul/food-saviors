@@ -7,6 +7,29 @@ CodeVoyagers 3 - Group 9: Food Savers
 - [NodeJS](https://nodejs.org/)
 - [Docker](https://docs.docker.com/get-started/get-docker/)
 
+## Quick setup
+Clone this repository and install all dependencies:
+```console
+git clone https://github.com/GabRodPul/food-savers.git
+cd food-savers
+npm i
+```
+
+Setup the database in a Docker container:
+```console
+'./start-database.sh'
+```
+
+Push the database:
+```console
+npm run db:push
+```
+
+Run the app, see if it works:
+```console
+npm run dev
+```
+
 ## Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
