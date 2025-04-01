@@ -10,6 +10,7 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// TODO: this is the default table; we should remove it 
 model Post {
     id        Int      @id @default(autoincrement())
     name      String
@@ -18,3 +19,40 @@ model Post {
 
     @@index([name])
 }
+
+// TODO: add relationships
+// TODO: add images
+model User {
+    id             Int      @id @default(autoincrement())
+    email          String
+    name           String
+    dateOfBirth    DateTime 
+}
+
+model Business {
+    id    Int @id @default(autoincrement())
+    name  String
+    location String
+}
+
+model Product {
+    id Int @id @default(autoincrement())
+    name String
+    stock String
+    expirationDate DateTime
+}
+
+model Review {
+    id Int @id @default(autoincrement())
+    userId Int
+    businessId Int
+    date DateTime
+    text String
+}
+
+model Allergen {
+    id Int @id @default(autoincrement())
+    code String
+}
+
+
