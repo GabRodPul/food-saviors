@@ -21,7 +21,7 @@ Copy .env.example to .env
 > - Ensure it's not being used by an existing MySQL installation (or other services).
 > - Change the port.
 
-> [!WARNING]
+> [!NOTE]
 > - In Unix:
 > ```console
 > cp .env.example .env
