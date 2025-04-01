@@ -20,12 +20,12 @@ Copy .env.example to .env
 > By default, .env.example uses port 3306. You could either:
 > - Ensure it's not being used by an existing MySQL installation (or other services).
 > - Change the port.
-> In Unix:
+>   - In Unix:
 > ```console
 > cp .env.example .env
 > ```
 >
-> In Windows:
+>   - In Windows:
 > ```console
 > copy .env.example .env
 > ```
