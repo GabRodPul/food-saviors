@@ -37,6 +37,10 @@ Setup the database in a Docker container:
 './start-database.sh'
 ```
 
+If you don't have netcat (in Windows, for example) you'll be prompted to confirm.
+You can have the script generate you a random password for your database and
+it'll replace `password` in the `DATABASE_URL` variable with it.
+
 Push the database:
 ```console
 npm run db:push
