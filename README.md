@@ -29,7 +29,7 @@ cp .env.example .env
 ```console
 copy .env.example .env
 ```
-
+Start the database:
 > [!NOTE]
 > TODO: Implement an alternative way to check for port usage without netcat.
 Setup the database in a Docker container:
