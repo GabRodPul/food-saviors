@@ -15,6 +15,17 @@ cd food-savers
 npm i
 ```
 
+Copy .env.example to .env
+- Unix:
+```console
+cp .env.example .env
+```
+
+- Windows:
+```console
+copy .env.example .env
+```
+
 Setup the database in a Docker container:
 ```console
 './start-database.sh'
