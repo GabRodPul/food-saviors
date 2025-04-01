@@ -30,8 +30,8 @@ cp .env.example .env
 copy .env.example .env
 ```
 
-> [!TODO]
-> Implement an alternative way to check for port usage without netcat.
+> [!NOTE]
+> TODO: Implement an alternative way to check for port usage without netcat.
 Setup the database in a Docker container:
 ```console
 './start-database.sh'
