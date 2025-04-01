@@ -20,15 +20,15 @@ Copy .env.example to .env
 > By default, .env.example uses port 3306. You could either:
 > - Ensure it's not being used by an existing MySQL installation (or other services).
 > - Change the port.
->> In Unix:
-```console
-cp .env.example .env
-```
-
->> In Windows:
-```console
-copy .env.example .env
-```
+> In Unix:
+> ```console
+> cp .env.example .env
+> ```
+>
+> In Windows:
+> ```console
+> copy .env.example .env
+> ```
 Start the database:
 > [!NOTE]
 > TODO: Implement an alternative way to check for port usage without netcat.
