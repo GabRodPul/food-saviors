@@ -1,0 +1,111 @@
+# Conventions
+
+This document specifies the different naming and structural conventions
+we should follow in our project to ensure consistance.
+
+## Project structure
+
+### Base structure
+
+By going to either the [Pages](https://create.t3.gg/en/folder-structure-pages?packages=prisma%2Ctailwind%2Ctrpc)
+or [App](https://create.t3.gg/en/folder-structure-app?packages=prisma%2Ctailwind%2Ctrpc)
+project structure, you can see what T3 initially generated for us...
+
+- [] NextAuth.js
+- [*] Prisma
+- [] Drizzle
+- [*] Tailwind CSS
+- [*] tRPC
+
+```
+.
+├─ prisma
+│  └─ schema.prisma
+├─ public
+│  └─ favicon.ico
+├─ src
+│  ├─ app
+│  │  ├─ _components
+│  │  │  └─ post.tsx
+│  │  ├─ api
+│  │  │  └─ trpc
+│  │  │     └─ [trpc]
+│  │  │        └─ route.ts
+│  │  ├─ layout.tsx
+│  │  └─ page.tsx
+│  ├─ server
+│  │  ├─ db.ts
+│  │  └─ api
+│  │     ├─ routers
+│  │     │  └─ example.ts
+│  │     ├─ trpc.ts
+│  │     └─ root.ts
+│  ├─ styles
+│  │  └─ globals.css
+│  ├─ env.js
+│  └─ trpc
+│     ├─ query-client.ts
+│     ├─ react.tsx
+│     └─ server.ts
+├─ .env
+├─ .env.example
+├─ .eslintrc.cjs
+├─ .gitignore
+├─ next-env.d.ts
+├─ next.config.js
+├─ package.json
+├─ postcss.config.js
+├─ prettier.config.js
+├─ README.md
+├─ tailwind.config.ts
+└─ tsconfig.json
+```
+
+### Current structure
+
+- Documentation: `./docs/.*.md`
+
+  - Images for `/docs/img/*`
+
+- Prisma: `./prisma/`
+  - !GITIGNORED - Generated zod schemas: `./prisma/_generated/*`
+
+## Coding
+
+### Prisma
+
+- Model definitions in `schema.prisma` must be `PascalCase`.
+- Relations for each model must go after the model's own fields. I.e:
+
+```prisma
+model Review {
+  id   Int      @id @default(autoincrement())
+  date DateTime
+  text String
+
+  /// Relations
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId Int
+}
+```
+
+### TypeScript
+
+#### Common
+
+- Variable, object and function names must be `camelCase`.
+- Type, class and funcional component names must be `PascalCase`.
+- Enviroment variable and any other actual constant of that sort must be `UPPER_SNAKE_CASE`.
+
+#### API routers
+
+- API routers must be placed inside `@food-savers/server/api/routers/`.
+
+  - Filename: `{model}.ts`.
+  - Export: `{model}Router.ts`.
+
+- API routers will be imported in `@food-savers/server/api/root.ts` as members of `appRouter`.
+  - Member name: `appRouter.{model}`

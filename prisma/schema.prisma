@@ -114,10 +114,12 @@ model Allergen {
 }
 
 model ProductAllergen {
-  productId    Int
-  allergenCode String
-  Product      Product  @relation(fields: [productId], references: [id])
+  /// Relation
+  Product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
   Allergen     Allergen @relation(fields: [allergenCode], references: [code])
+  allergenCode String
 
   @@id([productId, allergenCode])
 }
