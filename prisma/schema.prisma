@@ -12,47 +12,72 @@ datasource db {
 
 // TODO: this is the default table; we should remove it 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id          Int      @id @default(autoincrement())
+    name        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 
     @@index([name])
 }
 
-// TODO: add relationships
 // TODO: add images
 model User {
     id             Int      @id @default(autoincrement())
     email          String
     name           String
-    dateOfBirth    DateTime 
+    dateOfBirth    DateTime
+    businesses     Business[]
+    reviews        Review[]
+    purchases      Purchase[]
 }
 
 model Business {
-    id    Int @id @default(autoincrement())
-    name  String
-    location String
+    id          Int @id @default(autoincrement())
+    name        String
+    location    String
+    owner       User  @relation(fields: [ownerId], references: [id])
+    ownerId     Int
+    products    Product[]
+    reviews     Review[]
 }
 
 model Product {
-    id Int @id @default(autoincrement())
-    name String
-    stock String
-    expirationDate DateTime
+    id              Int @id @default(autoincrement())
+    name            String
+    price           Decimal
+    stock           String
+    expirationDate  DateTime
+    seller          Business @relation(fields: [sellerId], references: [id])
+    sellerId        Int
+    allergens       Allergen[]
+    purchases       Purchase[]
+}
+
+model Purchase{
+    id              Int @id @default(autoincrement())
+    quantity        Int
+    productPrice    Decimal // Businesses may change the price later
+    userId          Int
+    purchaser       User @relation(fields: [purchaserId], references: [id])
+    purchaserId     Int
+    product         Product @relation(fields: [productId], references: [id])
+    productId       Int
 }
 
 model Review {
-    id Int @id @default(autoincrement())
-    userId Int
-    businessId Int
-    date DateTime
-    text String
+    id          Int @id @default(autoincrement())
+    date        DateTime
+    text        String
+    user        User @relation(fields: [userId], references: [id])
+    userId      Int
+    business    Business @relation(fields: [businessId], references: [id])
+    businessId  Int
 }
 
 model Allergen {
-    id Int @id @default(autoincrement())
-    code String
+    id          Int @id @default(autoincrement())
+    code        String
+    products    Product[]
 }
 
 
