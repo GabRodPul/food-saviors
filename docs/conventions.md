@@ -11,11 +11,11 @@ By going to either the [Pages](https://create.t3.gg/en/folder-structure-pages?pa
 or [App](https://create.t3.gg/en/folder-structure-app?packages=prisma%2Ctailwind%2Ctrpc)
 project structure, you can see what T3 initially generated for us...
 
-- [] NextAuth.js
-- [*] Prisma
-- [] Drizzle
-- [*] Tailwind CSS
-- [*] tRPC
+- [ ] NextAuth.js
+- [x] Prisma
+- [ ] Drizzle
+- [x] Tailwind CSS
+- [x] tRPC
 
 ```
 .
