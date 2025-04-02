@@ -42,8 +42,8 @@ Copy .env.example to .env
 
 Start the database:
 
-> [!TODO]
-> Implement an alternative way to check for port usage without netcat.
+> [NOTE]
+> TODO: Implement an alternative way to check for port usage without netcat.
 
 - Setup the database in a Docker container:
 
