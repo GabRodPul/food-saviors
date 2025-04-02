@@ -1,6 +1,7 @@
 # Installation
 
-> [!NOTE] TODO: Add zod-prisma-types documentation
+> [!NOTE]
+> TODO: Add zod-prisma-types documentation
 
 ## Requirements
 
@@ -41,7 +42,8 @@ Copy .env.example to .env
 
 Start the database:
 
-> [!TODO]: Implement an alternative way to check for port usage without netcat.
+> [!TODO]
+> Implement an alternative way to check for port usage without netcat.
 
 - Setup the database in a Docker container:
 
@@ -65,7 +67,8 @@ npm run db:push
 npm run dev
 ```
 
-> [!NOTE]: Althought each time you push the database, all generators for
+> [!NOTE]
+> Althought each time you push the database, all generators for
 > Prisma types and zod-prisma-types validators will be ran again,
 > you can do it without modifying the database by running:
 > ```console
