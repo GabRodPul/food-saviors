@@ -98,7 +98,7 @@ model Review {
 
 - Variable, object and function names must be `camelCase`.
 - Type, class and funcional component names must be `PascalCase`.
-- Enviroment variable `UPPER_SNAKE_CASE`.
+- Enviroment variables must be `UPPER_SNAKE_CASE`.
 - Use declarations for exports.
 ```ts
 // Exporting declarations
