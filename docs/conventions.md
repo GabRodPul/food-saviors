@@ -63,12 +63,12 @@ project structure, you can see what T3 initially generated for us...
 
 ### Current structure
 
-- Documentation: `./docs/.*.md`
+- Documentation: `docs/.*.md`
 
-  - Images for `/docs/img/*`
+  - Images for `docs/img/*`
 
-- Prisma: `./prisma/`
-  - !GITIGNORED - Generated zod schemas: `./prisma/_generated/*`
+- Prisma: `prisma/`
+  - !GITIGNORED - Generated zod schemas: `prisma/_generated/*`
 
 ## Coding
 
