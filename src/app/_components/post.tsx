@@ -4,29 +4,35 @@ import { useState } from "react";
 
 import { api } from "@food-savers/trpc/react";
 
-export function LatestPost() {
-  const [latestPost] = api.post.getLatest.useSuspenseQuery();
+export function Product() {
+  const [product] = api.post.getLatest.useSuspenseQuery();
 
   const utils = api.useUtils();
   const [name, setName] = useState("");
-  const createPost = api.post.create.useMutation({
+  const createProduct = api.product.create.useMutation({
     onSuccess: async () => {
-      await utils.post.invalidate();
+      await utils.product.invalidate();
       setName("");
     },
   });
 
   return (
     <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
+      {product ? (
+        <p className="truncate">Your most recent post: {product.name}</p>
       ) : (
         <p>You have no posts yet.</p>
       )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createPost.mutate({ name });
+          const data = {
+            name,
+            price: 100,
+            stock: 100,
+            expirationDate: "2030-01-01"
+          }
+          // createProduct.mutate({ data });
         }}
         className="flex flex-col gap-2"
       >
@@ -40,9 +46,9 @@ export function LatestPost() {
         <button
           type="submit"
           className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-          disabled={createPost.isPending}
+          disabled={createProduct.isPending}
         >
-          {createPost.isPending ? "Submitting..." : "Submit"}
+          {createProduct.isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

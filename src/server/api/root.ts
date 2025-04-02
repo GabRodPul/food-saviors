@@ -3,6 +3,7 @@ import {
   createCallerFactory,
   createTRPCRouter,
 } from "@food-savers/server/api/trpc";
+import { productRouter } from "./routers/product";
 
 /**
  * This is the primary router for your server.
@@ -11,6 +12,7 @@ import {
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  product: productRouter
 });
 
 // export type definition of API

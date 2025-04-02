@@ -47,3 +47,6 @@ yarn-error.log*
 
 # prisma generated
 prisma/_generated/
+
+# nvim files
+**/Syntax tree for*/**

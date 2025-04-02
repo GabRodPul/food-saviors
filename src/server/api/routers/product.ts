@@ -1,70 +1,42 @@
-import { z } from "zod";
-
 import {
   createTRPCRouter,
   publicProcedure,
 } from "@food-savers/server/api/trpc";
 
-export const productRouter = createTRPCRouter ({
-    create: publicProcedure
-    .input(z.object({ 
-        name: z.string(),
-        price: z.number(),
-        stock: z.string(),
-        expirationDate: z.date(),
-        sellerId: z.number(),
-    }))
-    .mutation( async ({ ctx, input }) => {
-        return ctx.db.product.create({ 
-            data: { 
-                name: input.name,
-                price: input.price,
-                stock: input.stock,
-                expirationDate: input.expirationDate,
-                sellerId: input.sellerId,   
-            },
-        });
-    }),
+import {
+  ProductCreateArgsSchema,
+  ProductDeleteArgsSchema,
+  ProductFindUniqueArgsSchema,
+  ProductUpdateArgsSchema
+} from "@schemas/*";
 
-    getOne: publicProcedure
-    .input(z.object({
-        id: z.number()
-    }))
-    .query(async ({ ctx, input }) => {
-        const product = await ctx.db.product.findUnique({
-            where: { id: input.id },
-        });
-
-        return product ?? null;
-    }),
-
-    getAll: publicProcedure
-    .query(async ({ ctx }) => {
-        const products = await ctx.db.product.findMany();
-
-        return products;
-    }),
-
-    update: publicProcedure
-    .input(z.object({
-        id: z.number(),
-        name: z.string(),
-        price: z.number(),
-        stock: z.string(),
-        expirationDate: z.date(),
-        sellerId: z.number(),
-    }))
+export const productRouter = createTRPCRouter({
+  create: publicProcedure
+    .input(ProductCreateArgsSchema)
     .mutation(async ({ ctx, input }) => {
-        return ctx.db.product.update({
-            where: { id: input.id },
-            data: {
-                name: input.name,
-                price: input.price,
-                stock: input.stock,
-                expirationDate: input.expirationDate,
-                sellerId: input.sellerId,
-            }
-        });
+      return ctx.db.product.create(input);
     }),
-    
+
+  getOne: publicProcedure
+    .input(ProductFindUniqueArgsSchema)
+    .query(async ({ ctx, input }) => {
+      return ctx.db.product.findUnique(input);
+    }),
+
+  getAll: publicProcedure
+    .query(async ({ ctx }) => {
+      return ctx.db.product.findMany();
+    }),
+
+  update: publicProcedure
+    .input(ProductUpdateArgsSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.product.update(input);
+    }),
+
+  delete: publicProcedure
+    .input(ProductDeleteArgsSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.product.delete(input)
+    }),
 })
