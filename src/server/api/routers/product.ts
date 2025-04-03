@@ -4,23 +4,20 @@ import {
 } from "@food-savers/server/api/trpc";
 
 import {
-  ProductCreateArgsSchema,
-  ProductDeleteArgsSchema,
-  ProductFindUniqueArgsSchema,
-  ProductUpdateArgsSchema
+  ProductSchema
 } from "@schemas/*";
 
 export const productRouter = createTRPCRouter({
   create: publicProcedure
-    .input(ProductCreateArgsSchema)
+    .input(ProductSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.product.create(input);
+      return ctx.db.product.create({ data: input });
     }),
 
   getOne: publicProcedure
-    .input(ProductFindUniqueArgsSchema)
+    .input(ProductSchema)
     .query(async ({ ctx, input }) => {
-      return ctx.db.product.findUnique(input);
+      return ctx.db.product.findUnique({ where: { id: input.id } });
     }),
 
   getAll: publicProcedure
@@ -29,14 +26,14 @@ export const productRouter = createTRPCRouter({
     }),
 
   update: publicProcedure
-    .input(ProductUpdateArgsSchema)
+    .input(ProductSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.product.update(input);
+      return ctx.db.product.update({ where: { id: input.id }, data: input });
     }),
 
   delete: publicProcedure
-    .input(ProductDeleteArgsSchema)
+    .input(ProductSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.product.delete(input)
+      return ctx.db.product.delete({ where: { id: input.id } })
     }),
 })

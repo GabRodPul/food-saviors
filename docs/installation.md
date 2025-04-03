@@ -67,10 +67,11 @@ npm run db:push
 npm run dev
 ```
 
-> [!NOTE]
+> [!TIP]
 > Althought each time you push the database, all generators for
 > Prisma types and zod-prisma-types validators will be ran again,
 > you can do it without modifying the database by running:
+>
 > ```console
 > npm run postinstall
 > ```
