@@ -9,36 +9,25 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+
     /* Strictness */
     "strict": true,
-    "strictNullChecks": true, /* For zod-prisma-types to work properly, we need this. */
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
+
     /* Bundled projects */
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "ES2022"
-    ],
+    "lib": ["dom", "dom.iterable", "ES2022"],
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "incremental": true,
+
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@food-savers/*": [
-        "./src/*"
-      ],
-      "@schemas/*": [
-        "./prisma/_generated/schemas"
-      ]
+      "@food-savers/*": ["./src/*"]
     }
   },
   "include": [
@@ -50,7 +39,5 @@
     "**/*.js",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
