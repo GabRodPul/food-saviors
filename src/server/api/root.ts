@@ -4,6 +4,7 @@ import {
   createTRPCRouter,
 } from "@food-savers/server/api/trpc";
 import { productRouter } from "./routers/product";
+import { userRouter } from "./routers/user";
 
 /**
  * This is the primary router for your server.
@@ -12,7 +13,8 @@ import { productRouter } from "./routers/product";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  product: productRouter
+  product: productRouter,
+  user: userRouter
 });
 
 // export type definition of API
