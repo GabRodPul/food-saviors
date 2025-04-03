@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Product } from "@food-savers/app/_components/post";
+import { LatestPost } from "@food-savers/app/_components/post";
 import { api, HydrateClient } from "@food-savers/trpc/server";
 
 export default async function Home() {
@@ -45,7 +45,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <Product />
+          <LatestPost />
         </div>
       </main>
     </HydrateClient>

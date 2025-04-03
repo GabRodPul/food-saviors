@@ -44,9 +44,3 @@ yarn-error.log*
 
 # idea files
 .idea
-
-# prisma generated
-prisma/_generated/
-
-# nvim files
-**/Syntax tree for*/**
