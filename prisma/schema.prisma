@@ -2,19 +2,149 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider         = "zod-prisma-types"
+  output           = "./_generated/schemas"
+  useMultipleFiles = true
+  createInputTypes = false
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
+/// TODO: this is the default table; we should remove it
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@index([name])
+  @@index([name])
+}
+
+/// TODO: add images
+model User {
+  id          Int        @id @default(autoincrement())
+
+  /// @zod.string().email
+  email       String
+
+  /// @zod.string.min(1).max(64)
+  name        String
+
+  /// @zod.string().date()
+  dateOfBirth DateTime   @db.Date
+
+  /// Relations
+  businesses  Business[]
+  reviews     Review[]
+  purchases   Purchase[]
+}
+
+model Business {
+  id       Int       @id @default(autoincrement())
+
+  /// @zod.string.min(1).max(64)
+  name     String
+  
+  /// @zod.string().min(1).max(255)
+  location String
+
+  /// Relations
+  owner    User      @relation(fields: [ownerId], references: [id])
+  ownerId  Int
+
+  products Product[]
+
+  reviews  Review[]
+}
+
+/// NOTE: zod-prisma-types generator will just generate the files without checking
+/// if you're closing braces properly or if an import path is correct.
+/// This also means that you can freely use path aliases.
+/// You need to run postinstall everytime you make any changes here, then run dev.
+/// Also, for validating Prisma.Decimal, this package provides its own
+/// decimal validator.
+/// @zod.import(["import { DecimalJsLikeSchema } from '@schemas/inputTypeSchemas/DecimalJsLikeSchema'"])
+model Product {
+  id Int @id @default(autoincrement())
+
+  /// @zod.string.min(1).max(64)
+  name String
+
+  /// @zod.custom.use(z.number().positive().refine((val) => DecimalJsLikeSchema.parse(val)))
+  price Decimal
+
+  /// @zod.number.int().positive()
+  stock          Int
+
+  /// @zod.string().date()
+  expirationDate DateTime  @db.Date
+
+  /// Relations
+  seller   Business @relation(fields: [sellerId], references: [id])
+  sellerId Int
+
+  allergens ProductAllergen[]
+
+  purchases Purchase[]
+}
+
+model Purchase {
+  id Int @id @default(autoincrement())
+
+  /// @zod.number.int().positive()
+  quantity Int
+
+  /// @zod.custom.use(z.number().positive().refine((val) => DecimalJsLikeSchema.parse(val)))
+  productPrice Decimal /// Businesses may change the price later
+
+  /// Relations
+  purchaser   User @relation(fields: [purchaserId], references: [id])
+  purchaserId Int
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Review {
+  id   Int      @id @default(autoincrement())
+
+  /// @zod.string().date()
+  date DateTime  @db.Date
+
+  text String
+
+  /// Relations
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId Int
+}
+
+model Allergen {
+  code     String            @id
+
+  /// @zod.string.min(1).max(64)
+  name     String
+
+  /// Relation
+  products ProductAllergen[]
+}
+
+model ProductAllergen {
+  /// Relation
+  Product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  Allergen     Allergen @relation(fields: [allergenCode], references: [code])
+  allergenCode String
+
+  @@id([productId, allergenCode])
 }
