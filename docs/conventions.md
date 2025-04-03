@@ -3,6 +3,48 @@
 This document specifies the different naming and structural conventions
 we should follow in our project to ensure consistance.
 
+## Project sections
+
+Our project can be divided into 4 sections:
+
+- DESIGN
+- BACKEND
+- FRONTEND
+- DOCUMENTATION (feel free to shorten to DOCS if you want)
+
+## Branching model
+
+### Issues
+
+Issues must be named like this:
+
+```console
+<SECTION> - <Issue title>
+```
+
+Where:
+
+- `SECTION` refers to the [section's](#project-sections) name, in `UPPERCASE`.
+- `Issue title` is the title of the issue. It should be a short phrase.
+
+Add descriptions when the title may require more context.
+
+### Branch names
+
+We must follow a branching model like the next one:
+
+```console
+main
+└── develop
+    └── [...feature/<section>/IBC-<code>_<short-description>]
+```
+
+Where:
+
+- `section` refers to the [section's](#project-sections) name, in `lowercase`.
+- `code` refers to the `numeric` code of the [issue](#issues).
+- `short-description` is a short description of the [issue](#issues), in `lower-kebab-case`.
+
 ## Project structure
 
 ### Base structure
@@ -100,15 +142,23 @@ model Review {
 - Type, class and funcional component names must be `PascalCase`.
 - Enviroment variables must be `UPPER_SNAKE_CASE`.
 - Use declarations for exports.
+
 ```ts
 // Exporting declarations
-export let name1, name2/*, … */; // also var
-export const name1 = 1, name2 = 2/*, … */; // also var, let
-export function functionName() { /* … */ }
-export class ClassName { /* … */ }
-export function generatorFunctionName() { /* … */ }
+export let name1, name2 /*, … */; // also var
+export const name1 = 1,
+  name2 = 2; /*, … */ // also var, let
+export function functionName() {
+  /* … */
+}
+export class ClassName {
+  /* … */
+}
+export function generatorFunctionName() {
+  /* … */
+}
 export const { name1, name2: bar } = o;
-export const [ name1, name2 ] = array;
+export const [name1, name2] = array;
 ```
 
 #### API routers
