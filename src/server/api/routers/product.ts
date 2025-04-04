@@ -1,7 +1,7 @@
 import {
   createTRPCRouter,
   publicProcedure,
-} from "@food-savers/server/api/trpc";
+} from "@food-saviors/server/api/trpc";
 
 import {
   ProductSchema

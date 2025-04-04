@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-import { env } from "@food-savers/env";
+import { env } from "@food-saviors/env";
 
 const createPrismaClient = () =>
   new PrismaClient({

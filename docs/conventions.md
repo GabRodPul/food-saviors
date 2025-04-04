@@ -163,10 +163,10 @@ export const [name1, name2] = array;
 
 #### API routers
 
-- API routers must be placed inside `@food-savers/server/api/routers/`.
+- API routers must be placed inside `@food-saviors/server/api/routers/`.
 
   - Filename: `{model}.ts`.
   - Export: `{model}Router.ts`.
 
-- API routers will be imported in `@food-savers/server/api/root.ts` as members of `appRouter`.
+- API routers will be imported in `@food-saviors/server/api/root.ts` as members of `appRouter`.
   - Member name: `appRouter.{model}`
