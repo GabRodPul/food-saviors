@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Product } from "@food-savers/app/_components/post";
-import { api, HydrateClient } from "@food-savers/trpc/server";
+import { Product } from "@food-saviors/app/_components/post";
+import { api, HydrateClient } from "@food-saviors/trpc/server";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });

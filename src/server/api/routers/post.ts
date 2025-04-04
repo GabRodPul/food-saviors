@@ -3,7 +3,7 @@ import { z } from "zod";
 import {
   createTRPCRouter,
   publicProcedure,
-} from "@food-savers/server/api/trpc";
+} from "@food-saviors/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
   hello: publicProcedure

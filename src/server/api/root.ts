@@ -1,8 +1,8 @@
-import { postRouter } from "@food-savers/server/api/routers/post";
+import { postRouter } from "@food-saviors/server/api/routers/post";
 import {
   createCallerFactory,
   createTRPCRouter,
-} from "@food-savers/server/api/trpc";
+} from "@food-saviors/server/api/trpc";
 import { productRouter } from "./routers/product";
 import { userRouter } from "./routers/user";
 import { businessRouter } from "./routers/business";
