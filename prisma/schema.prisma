@@ -31,13 +31,13 @@ model Post {
 model User {
   id          Int        @id @default(autoincrement())
 
-  /// @zod.string().email
+  /// @zod.string.email()
   email       String
 
   /// @zod.string.min(1).max(64)
   name        String
 
-  /// @zod.string().date()
+  /// @zod.date
   dateOfBirth DateTime   @db.Date
 
   /// Relations
@@ -52,7 +52,7 @@ model Business {
   /// @zod.string.min(1).max(64)
   name     String
   
-  /// @zod.string().min(1).max(255)
+  /// @zod.string.min(1).max(255)
   location String
 
   /// Relations
@@ -83,7 +83,7 @@ model Product {
   /// @zod.number.int().positive()
   stock          Int
 
-  /// @zod.string().date()
+  /// @zod.date
   expirationDate DateTime  @db.Date
 
   /// Relations
@@ -115,7 +115,7 @@ model Purchase {
 model Review {
   id   Int      @id @default(autoincrement())
 
-  /// @zod.string().date()
+  /// @zod.date
   date DateTime  @db.Date
 
   text String
