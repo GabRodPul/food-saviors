@@ -30,9 +30,17 @@ model Post {
 /// TODO: add images
 model User {
   id          Int        @id @default(autoincrement())
+
+  /// @zod.string.email()
   email       String
+
+  /// @zod.string.min(1).max(64)
   name        String
+
+  /// @zod.date
   dateOfBirth DateTime   @db.Date
+
+  /// Relations
   businesses  Business[]
   reviews     Review[]
   purchases   Purchase[]
@@ -40,11 +48,19 @@ model User {
 
 model Business {
   id       Int       @id @default(autoincrement())
+
+  /// @zod.string.min(1).max(64)
   name     String
+  
+  /// @zod.string.min(1).max(255)
   location String
+
+  /// Relations
   owner    User      @relation(fields: [ownerId], references: [id])
   ownerId  Int
+
   products Product[]
+
   reviews  Review[]
 }
 
@@ -66,7 +82,9 @@ model Product {
 
   /// @zod.number.int().positive()
   stock          Int
-  expirationDate DateTime
+
+  /// @zod.date
+  expirationDate DateTime  @db.Date
 
   /// Relations
   seller   Business @relation(fields: [sellerId], references: [id])
@@ -96,7 +114,10 @@ model Purchase {
 
 model Review {
   id   Int      @id @default(autoincrement())
-  date DateTime
+
+  /// @zod.date
+  date DateTime  @db.Date
+
   text String
 
   /// Relations
@@ -109,7 +130,10 @@ model Review {
 
 model Allergen {
   code     String            @id
+
+  /// @zod.string.min(1).max(64)
   name     String
+
   /// Relation
   products ProductAllergen[]
 }

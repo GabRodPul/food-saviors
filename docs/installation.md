@@ -13,8 +13,8 @@
 - Clone this repository and install all dependencies:
 
 ```console
-git clone https://github.com/GabRodPul/food-savers.git
-cd food-savers
+git clone https://github.com/GabRodPul/food-saviors.git
+cd food-saviors
 npm i
 ```
 

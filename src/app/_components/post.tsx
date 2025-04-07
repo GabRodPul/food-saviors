@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { api } from "@food-savers/trpc/react";
+import { api } from "@food-saviors/trpc/react";
 
 export function Product() {
   const [product] = api.post.getLatest.useSuspenseQuery();

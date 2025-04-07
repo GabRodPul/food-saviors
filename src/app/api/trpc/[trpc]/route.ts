@@ -1,9 +1,9 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { type NextRequest } from "next/server";
 
-import { env } from "@food-savers/env";
-import { appRouter } from "@food-savers/server/api/root";
-import { createTRPCContext } from "@food-savers/server/api/trpc";
+import { env } from "@food-saviors/env";
+import { appRouter } from "@food-saviors/server/api/root";
+import { createTRPCContext } from "@food-saviors/server/api/trpc";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when

@@ -1,9 +1,14 @@
-import { postRouter } from "@food-savers/server/api/routers/post";
+import { postRouter } from "@food-saviors/server/api/routers/post";
 import {
   createCallerFactory,
   createTRPCRouter,
-} from "@food-savers/server/api/trpc";
+} from "@food-saviors/server/api/trpc";
 import { productRouter } from "./routers/product";
+import { userRouter } from "./routers/user";
+import { businessRouter } from "./routers/business";
+import { reviewRouter } from "./routers/review";
+import { allergenRouter } from "./routers/allergen";
+import { purchaseRouter } from "./routers/purchase";
 
 /**
  * This is the primary router for your server.
@@ -12,7 +17,12 @@ import { productRouter } from "./routers/product";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  product: productRouter
+  product: productRouter,
+  user: userRouter,
+  business: businessRouter,
+  review: reviewRouter,
+  allergen: allergenRouter,
+  purchase: purchaseRouter
 });
 
 // export type definition of API

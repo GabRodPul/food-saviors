@@ -1,4 +1,4 @@
-# food-savers
+# food-saviors
 
 CodeVoyagers 3 - Group 9: Food Savers
 
