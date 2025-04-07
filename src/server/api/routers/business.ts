@@ -2,23 +2,30 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "@food-saviors/server/api/trpc";
+import { IdSchema } from "@food-saviors/types/data/pkey";
 
 // TODO: Implement business router
 import {
   BusinessSchema
-}from "@schemas/*";
+} from "@schemas/*";
 
 export const businessRouter = createTRPCRouter({
   create: publicProcedure
-    .input(BusinessSchema)
+    .input(BusinessSchema.omit({ id: true }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.business.create({ data: input });
     }),
 
-  getOne: publicProcedure
-    .input(BusinessSchema)
+  getOneById: publicProcedure
+    .input(IdSchema)
     .query(async ({ ctx, input }) => {
       return ctx.db.business.findUnique({ where: { id: input.id } });
+    }),
+
+  getAllWhere: publicProcedure
+    .input(BusinessSchema.omit({ id: true }).partial())
+    .query(async ({ ctx, input }) => {
+      return ctx.db.business.findMany({ where: input })
     }),
 
   getAll: publicProcedure
@@ -33,7 +40,7 @@ export const businessRouter = createTRPCRouter({
     }),
 
   delete: publicProcedure
-    .input(BusinessSchema)
+    .input(IdSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.business.delete({ where: { id: input.id } })
     }),

@@ -15,7 +15,7 @@ export const productAllergenRouter = createTRPCRouter({
     }),
 
   getByProductId: publicProcedure
-    .input(ProductAllergenSchema)
+    .input(ProductAllergenSchema.pick({ productId: true }))
     .query(async ({ ctx, input }) => {
       return ctx.db.productAllergen.findMany({ where: { productId: input.productId } });
     }),
