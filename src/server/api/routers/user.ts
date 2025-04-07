@@ -2,21 +2,22 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "@food-saviors/server/api/trpc";
+import { IdSchema } from "@food-saviors/types/data/pkey";
 
 // TODO: Implement user router
 import {
   UserSchema
-}from "@schemas/*";
+} from "@schemas/*";
 
 export const userRouter = createTRPCRouter({
   create: publicProcedure
-    .input(UserSchema)
+    .input(UserSchema.omit({ id: true }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.user.create({ data: input });
     }),
 
-  getOne: publicProcedure
-    .input(UserSchema)
+  getOneById: publicProcedure
+    .input(IdSchema)
     .query(async ({ ctx, input }) => {
       return ctx.db.user.findUnique({ where: { id: input.id } });
     }),
@@ -33,7 +34,7 @@ export const userRouter = createTRPCRouter({
     }),
 
   delete: publicProcedure
-    .input(UserSchema)
+    .input(IdSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.user.delete({ where: { id: input.id } })
     }),

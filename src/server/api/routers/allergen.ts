@@ -6,7 +6,7 @@ import {
 // TODO: Implement allergen router
 import {
   AllergenSchema
-}from "@schemas/*";
+} from "@schemas/*";
 
 export const allergenRouter = createTRPCRouter({
   create: publicProcedure
@@ -15,8 +15,8 @@ export const allergenRouter = createTRPCRouter({
       return ctx.db.allergen.create({ data: input });
     }),
 
-  getOne: publicProcedure
-    .input(AllergenSchema)
+  getByCode: publicProcedure
+    .input(AllergenSchema.pick({ code: true }))
     .query(async ({ ctx, input }) => {
       return ctx.db.allergen.findUnique({ where: { code: input.code } });
     }),
@@ -33,7 +33,7 @@ export const allergenRouter = createTRPCRouter({
     }),
 
   delete: publicProcedure
-    .input(AllergenSchema)
+    .input(AllergenSchema.pick({ code: true }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.allergen.delete({ where: { code: input.code } })
     }),

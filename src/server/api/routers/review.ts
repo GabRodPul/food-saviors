@@ -2,21 +2,22 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "@food-saviors/server/api/trpc";
+import { IdSchema } from "@food-saviors/types/data/pkey";
 
 // TODO: Implement review router
 import {
   ReviewSchema
-}from "@schemas/*";
+} from "@schemas/*";
 
 export const reviewRouter = createTRPCRouter({
   create: publicProcedure
-    .input(ReviewSchema)
+    .input(ReviewSchema.omit({ id: true }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.review.create({ data: input });
     }),
 
-  getOne: publicProcedure
-    .input(ReviewSchema)
+  getOneById: publicProcedure
+    .input(IdSchema)
     .query(async ({ ctx, input }) => {
       return ctx.db.review.findUnique({ where: { id: input.id } });
     }),
@@ -26,6 +27,12 @@ export const reviewRouter = createTRPCRouter({
       return ctx.db.review.findMany();
     }),
 
+  getAllWhere: publicProcedure
+    .input(ReviewSchema.omit({ id: true }).partial())
+    .query(async ({ ctx, input }) => {
+      return ctx.db.review.findMany({ where: input })
+    }),
+
   update: publicProcedure
     .input(ReviewSchema)
     .mutation(async ({ ctx, input }) => {
@@ -33,7 +40,7 @@ export const reviewRouter = createTRPCRouter({
     }),
 
   delete: publicProcedure
-    .input(ReviewSchema)
+    .input(IdSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.review.delete({ where: { id: input.id } })
     }),
