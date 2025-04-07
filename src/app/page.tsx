@@ -1,53 +1,43 @@
-import Link from "next/link";
+import React from "react";
 
-import { Product } from "@food-savers/app/_components/post";
-import { api, HydrateClient } from "@food-savers/trpc/server";
-
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-
-  void api.post.getLatest.prefetch();
-
+const Home: React.FC = () => {
   return (
-    <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
-          </div>
+    <div className="relative min-h-screen bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat">
+      <nav className="flex items-center justify-between p-4">
+        <h1 className="text-xl font-semibold text-white">Food Savers</h1>
+        <button className="text-white">
+          <span className="text-2xl">☰</span>
+        </button>
+      </nav>
 
-          <Product />
+      <div className="flex h-[70vh] flex-col items-center justify-center px-6 text-center text-white">
+        <h2 className="text-3xl leading-snug font-bold">
+          Save Food.
+          <br /> Save Money.
+          <br /> Save the Planet.
+        </h2>
+        <div className="mt-6 animate-bounce">
+          <img src="/arrowdown.svg" alt="Arrow down" className="h-8 w-8" />
         </div>
-      </main>
-    </HydrateClient>
+      </div>
+
+      <div className="absolute right-0 bottom-10 left-0 flex justify-center space-x-4">
+        {[
+          { label: "Restaurants", icon: "/restauranticon.svg" },
+          { label: "Bakeries", icon: "/bakeriesicon.svg" },
+          { label: "Groceries", icon: "/groceriesicon.svg" },
+        ].map(({ label, icon }) => (
+          <button
+            key={label}
+            className="flex w-24 flex-col items-center rounded-2xl bg-white/20 p-4 text-white backdrop-blur-md"
+          >
+            <img src={icon} alt={label} className="h-8 w-8" />
+            <span className="mt-1 text-sm">{label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
-}
+};
+
+export default Home;
