@@ -10,6 +10,8 @@ export const IdSchema = z.object({
   id: z.number().int()
 });
 
+
+// TODO: Look for a way to better implement something like this
 /**
  * @template T
  * @param schema to remove `id` property from
