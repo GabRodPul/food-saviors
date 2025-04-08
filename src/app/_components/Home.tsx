@@ -1,4 +1,3 @@
-// components/Home.tsx
 import React from "react";
 import ArrowDownButton from "./ArrowDownButton";
 import RestaurantsButton from "./RestaurantsButton";
@@ -9,7 +8,7 @@ import HamburgerMenu from "./HamburgerMenu";
 const Home: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat">
-      <nav className="fixed top-0 right-0 left-0 z-10 flex items-center justify-between bg-[#004D47]/50 p-4">
+      <nav className="fixed top-6 right-5 left-5 z-10 flex items-center justify-between rounded-xl bg-[#004D47]/50 p-4">
         <h1 className="text-xl font-semibold text-white">Food Savers</h1>
         <HamburgerMenu />
       </nav>
