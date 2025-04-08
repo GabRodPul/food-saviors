@@ -96,7 +96,7 @@ const UserProfile: React.FC = () => {
           </div>
         </div>
 
-        {/* Recent Section */}
+        {}
         <div className="my-8">
           <h3 className="text-lg font-semibold text-[#004D47]">Recent</h3>
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
