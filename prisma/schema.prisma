@@ -55,6 +55,9 @@ model Business {
   /// @zod.string.min(1).max(255)
   location String
 
+  /// @zod.enum
+  category     BusinessCategory
+
   /// Relations
   owner    User      @relation(fields: [ownerId], references: [id])
   ownerId  Int
@@ -62,6 +65,12 @@ model Business {
   products Product[]
 
   reviews  Review[]
+}
+
+enum BusinessCategory {
+  RESTAURANT
+  BAKERY
+  GROCERY
 }
 
 /// NOTE: zod-prisma-types generator will just generate the files without checking
