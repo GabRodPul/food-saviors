@@ -11,6 +11,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+
+    JWT_SECRET: z.string().min(64).max(128)
   },
 
   /**
