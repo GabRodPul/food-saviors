@@ -1,10 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (username && password) {
+      // Redirect to /user-profile and pass userName in the URL as query
+      router.push(`/user-profile?userName=${encodeURIComponent(username)}`);
+    } else {
+      alert("Please enter valid credentials!");
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
@@ -20,11 +33,13 @@ const LoginPage: React.FC = () => {
           Sign in
         </h1>
 
-        <form className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="mb-1 block text-sm font-semibold">Username</label>
             <input
               type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full rounded-md border border-[#009688] px-3 py-2 outline-none focus:ring-2 focus:ring-[#009688]"
             />
           </div>
@@ -33,6 +48,8 @@ const LoginPage: React.FC = () => {
             <label className="mb-1 block text-sm font-semibold">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-md border border-[#009688] px-3 py-2 outline-none focus:ring-2 focus:ring-[#009688]"
             />
           </div>
