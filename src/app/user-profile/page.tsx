@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const UserProfile: React.FC = () => {
   const searchParams = useSearchParams();
@@ -104,7 +105,7 @@ const UserProfile: React.FC = () => {
                 key={index}
                 className="flex flex-col items-center overflow-hidden rounded-lg bg-white shadow-md"
               >
-                <img
+                <Image
                   src={item.imageUrl}
                   alt={item.name}
                   className="h-40 w-full object-cover"
