@@ -2,7 +2,9 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "@food-saviors/server/api/trpc";
+import { ImageFileSchema } from "@food-saviors/types/data/image-file";
 import { IdSchema } from "@food-saviors/types/data/pkey";
+import { f } from "@food-saviors/utils/files";
 
 // TODO: Implement user router
 import {
@@ -28,9 +30,18 @@ export const userRouter = createTRPCRouter({
     }),
 
   update: publicProcedure
-    .input(UserSchema)
+    .input(UserSchema.merge(ImageFileSchema.innerType()))
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.user.update({ where: { id: input.id }, data: input });
+      const { image, ...user } = input;
+      const file = image;
+      return f.uploadFile({
+        ctx,
+        file,
+        name: `user_${user.id}`,
+        beforeUpload: [
+          ctx.db.user.update({ where: { id: input.id }, data: input })
+        ]
+      });
     }),
 
   delete: publicProcedure
