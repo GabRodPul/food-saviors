@@ -1,3 +1,4 @@
+import Footer from "../_components/Footer";
 import Home from "../_components/Home";
 import ClientOnlyMap from "../_components/map/ClientOnlyMap";
 import TextSection from "../_components/TextSection";
@@ -20,6 +21,7 @@ export default function MainPage() {
         text3="Best before dates are not expiration dates — most foods are safe to eat weeks or months after "
       />
       <ClientOnlyMap />
+      <Footer />
     </>
   );
 }
