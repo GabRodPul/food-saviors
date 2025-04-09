@@ -1,12 +1,12 @@
-import React from "react";
 import Home from "./_components/Home";
 
-const Page: React.FC = () => {
+import { HydrateClient } from "@food-saviors/trpc/server";
+export default async function HomePage() {
   return (
-    <div>
-      <Home /> {}
-    </div>
+    <HydrateClient>
+      <main className="flex min-h-screen flex-col justify-center">
+        <Home />
+      </main>
+    </HydrateClient>
   );
-};
-
-export default Page;
+}
