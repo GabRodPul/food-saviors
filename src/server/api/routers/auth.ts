@@ -27,7 +27,10 @@ export const authRouter = createTRPCRouter({
         });
 
         const { password, ...user } = fullUser;
-        return { data: { user, token } }
+        return { 
+          status: "success",
+          data: { user, token } 
+        }
       } catch (err: any) {
         switch (err.code) {
           case "P2002":
@@ -58,8 +61,11 @@ export const authRouter = createTRPCRouter({
         const token = jwt.sign(user, env.JWT_SECRET, {
           expiresIn: 60 * 60 * 24 * 7 // One week
         });
-
-        return { data: { user, token } }
+        
+        return { 
+          status: "success",
+          data: { user, token } 
+        }
       } catch (err: any) {
         throw err;
       }
