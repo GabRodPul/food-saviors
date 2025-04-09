@@ -1,11 +1,11 @@
-import Home from "./_components/Home";
+import Map from "./_components/Map";
 
 import { HydrateClient } from "@food-saviors/trpc/server";
 export default async function HomePage() {
   return (
     <HydrateClient>
       <main className="flex min-h-screen flex-col justify-center">
-        <Home />
+        <Map />
       </main>
     </HydrateClient>
   );

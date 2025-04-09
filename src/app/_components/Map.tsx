@@ -1,15 +1,25 @@
-"use client"; // required if you're using Next.js App Router
+"use client";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { useEffect } from "react";
-import "@/lib/fixLeafletIcons";
+import "../lib/fixLeafletIcons";
 
-export default function Map() {
+// Optional fix for default marker icons in Next.js
+
+export default function SimpleMap() {
   return (
-    <div>
-      <div></div>
-    </div>
+    <MapContainer
+      center={[28.1235, -15.4363]}
+      zoom={13}
+      scrollWheelZoom={false}
+      className="z-0 h-[500px] w-full rounded-lg"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={[40.4168, -3.7038]}>
+        <Popup>Hello from Madrid! 📍</Popup>
+      </Marker>
+    </MapContainer>
   );
 }
