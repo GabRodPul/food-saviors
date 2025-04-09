@@ -11,7 +11,7 @@ export default function SimpleMap() {
       center={[28.1235, -15.4363]}
       zoom={13}
       scrollWheelZoom={false}
-      className="z-0 my-6 h-[500px] w-full"
+      className="z-0 mt-6 h-[500px] w-full"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
