@@ -1,8 +1,4 @@
-
-
-
 import MainPage from "./MainPage/page";
-
 
 import { HydrateClient } from "@food-saviors/trpc/server";
 
@@ -37,7 +33,7 @@ PUT ALL THE DATA IN IT SO THAT WE HAVE EVERYTHING
 
 /*
 ====================================================================================================================================
-MAKE A PRESENTTATION, FANNAR - TALK ABOUT THE PRODUCT, GABRIELAND CORNELIS TALK ABOUT SOME BACKEND CODE, RAFAL TAKES CARE OF THE Q&A
+MAKE A PRESENTTATION, FANNAR? - TALK ABOUT THE PRODUCT, GABRIELAND AND CORNELIS? TALK ABOUT SOME BACKEND CODE, RAFAL? TAKES CARE OF THE Q&A
 ====================================================================================================================================
 */
 

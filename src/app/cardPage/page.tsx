@@ -2,6 +2,7 @@ import BakeriesButton from "../_components/BakeriesButton";
 import Card from "../_components/card";
 import Footer from "../_components/Footer";
 import GroceriesButton from "../_components/GroceriesButton";
+import NavBar from "../_components/NavBar";
 import RestaurantsButton from "../_components/RestaurantsButton";
 
 type BusinessCategory = "Restaurant" | "Bakery" | "Groceries";
@@ -79,6 +80,7 @@ const businesses: Business[] = [
 export default function CardPage() {
   return (
     <>
+      <NavBar />
       <div className="mx-16 my-32 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {businesses.map((buss) => {
           const stars = Array.from({ length: 5 }, (_, i) => i < buss.numStars);
