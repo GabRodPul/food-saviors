@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const HamburgerMenu = () => {
+const HamburgerMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -16,10 +16,17 @@ const HamburgerMenu = () => {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-label="Toggle menu"
         className="transition hover:opacity-70"
       >
-        <Image src="/hamburgermenu.svg" alt="Menu" width={24} height={24} />
+        <Image
+          src="/hamburgermenu.svg"
+          alt="Hamburger Menu Icon"
+          width={24}
+          height={24}
+          style={{ width: "auto", height: "auto" }}
+        />
       </button>
 
       {isOpen && (

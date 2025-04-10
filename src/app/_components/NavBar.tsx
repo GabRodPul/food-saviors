@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import HamburgerMenu from "./HamburgerMenu";
+import HamburgerMenu from "src/app/_components/HamburgerMenu";
 
 const NavBar: React.FC = () => {
   return (

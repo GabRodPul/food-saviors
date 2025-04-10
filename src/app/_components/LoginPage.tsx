@@ -3,26 +3,48 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { api } from "@food-saviors/trpc/react";
+import type { User } from "@prisma/client";
+
+type Data = { user: Omit<User, "password">; token: string };
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [auth, setAuth] = useState<Data | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const login = api.auth.login.useMutation({
+    onSuccess: (data) => {
+      setAuth(data.data);
+      setError(null);
+
+      router.push(
+        `/user-profile?userName=${encodeURIComponent(data.data.user.name)}`,
+      );
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+      setError(error.message || "Invalid email or password");
+    },
+  });
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (username && password) {
-      router.push(`/user-profile?userName=${encodeURIComponent(username)}`);
-    } else {
+    if (!username || !password) {
       alert("Please enter valid credentials!");
+      return;
     }
+
+    login.mutate({ email: username, password });
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="w-full max-w-xs">
-        {/* Back arrow goes to Home */}
         <button
           onClick={() => router.push("/")}
           className="mb-6 transition hover:opacity-70"
@@ -41,9 +63,9 @@ const LoginPage: React.FC = () => {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-semibold">Username</label>
+            <label className="mb-1 block text-sm font-semibold">Email</label>
             <input
-              type="text"
+              type="email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full rounded-md border border-[#009688] px-3 py-2 outline-none focus:ring-2 focus:ring-[#009688]"
@@ -60,11 +82,14 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
+          {error && <p className="text-center text-sm text-red-500">{error}</p>}
+
           <button
             type="submit"
-            className="w-full rounded-md bg-[#009688] py-2 font-semibold text-white transition hover:bg-[#00796B]"
+            disabled={login.isLoading}
+            className="w-full rounded-md bg-[#009688] py-2 font-semibold text-white transition hover:bg-[#00796B] disabled:opacity-50"
           >
-            Login
+            {login.isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
 
