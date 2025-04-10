@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
@@ -12,7 +13,6 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
 
     if (username && password) {
-      // Redirect to /user-profile and pass userName in the URL as query
       router.push(`/user-profile?userName=${encodeURIComponent(username)}`);
     } else {
       alert("Please enter valid credentials!");
@@ -22,11 +22,17 @@ const LoginPage: React.FC = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="w-full max-w-xs">
+        {/* Back arrow goes to Home */}
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/")}
           className="mb-6 transition hover:opacity-70"
         >
-          <img src="/arrowback.svg" alt="Back" className="h-5 w-5" />
+          <Image
+            src="/arrowback.svg"
+            alt="Back to Home"
+            width={20}
+            height={20}
+          />
         </button>
 
         <h1 className="mb-8 text-center text-3xl font-bold text-[#004D47]">

@@ -1,5 +1,4 @@
-import Home from "./_components/Home";
-
+import Home from "src/app/_components/Home.tsx";
 import { HydrateClient } from "@food-saviors/trpc/server";
 export default async function HomePage() {
   return (
