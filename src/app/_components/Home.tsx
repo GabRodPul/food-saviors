@@ -7,7 +7,7 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const Home: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat">
+    <div className="relative min-h-screen bg-black/50 bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
       <nav className="fixed top-6 right-5 left-5 z-10 flex items-center justify-between rounded-xl bg-[#004D47]/50 p-4">
         <h1 className="text-xl font-semibold text-white">Food Savers</h1>
         <HamburgerMenu />
