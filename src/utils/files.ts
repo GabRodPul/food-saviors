@@ -4,18 +4,92 @@ import { Readable } from "stream";
 import type { TRPCContext } from "@food-saviors/types/helpers/trpc";
 import type { Prisma } from "@prisma/client";
 import { r } from "@food-saviors/types/helpers/result";
+import { TRPCError } from "@trpc/server";
+import type { FileSrc as Src } from "@food-saviors/types/data/image-file";
+import type { Return } from "@prisma/client/runtime/client";
 
 export namespace f {
-  export const uploadFile = async (args: { ctx: TRPCContext, name: string, file: File, beforeUpload: Prisma.PrismaPromise<any>[] }) => {
-    const { ctx, name, file, beforeUpload } = args;
+  class Static {
+    static readonly commonImgFileExt = [
+      // A/PNG
+      ".apng",
+      ".png",
+
+      // AVIF
+      ".avif",
+
+      // GIF
+      ".gif",
+
+      // JPEG
+      ".jpg",
+      ".jpeg",
+      "jfif",
+      ".pjpeg",
+      ".pjp",
+
+      // SVG
+      ".svg",
+
+      // WEBP
+      ".webp",
+    ]
+  }
+
+  const verifyFileExt = (file: File, ext: string): boolean =>
+    file.name.lastIndexOf(ext) === file.name.length - ext.length;
+
+  export const verifyFileExtMany = (file: File, ext: string[]): boolean => {
+    for (const e of ext) {
+      if (verifyFileExt(file, e))
+        return true;
+    }
+
+    return false;
+  }
+
+  export type UploadArgs = {
+    name: string,
+    file: File,
+    prisma?: {
+      ctx: TRPCContext,
+      beforeUpload: Prisma.PrismaPromise<any>[]
+    }
+  };
+
+  export type UploadResult = r.Result<{ txn: any[], img: Src }, TRPCError>;
+  export const uploadFile = async (args: UploadArgs)
+    : Promise<UploadResult> => {
+    const {
+      name,
+      file,
+      prisma
+    } = args;
     try {
-      const txn = await ctx.db.$transaction(beforeUpload);
+      let txn: any[] = [];
+      if (!!prisma) {
+        const { ctx, beforeUpload } = prisma;
+        txn = await ctx.db.$transaction(beforeUpload)
+      }
+
       const img = await writeFile(name, file);
 
       return r.ok({ txn, img });
     } catch (err: any) {
       return r.err(err);
     }
+  }
+
+  export const uploadImage = async (args: UploadArgs)
+    : Promise<UploadResult> => {
+    if (!verifyFileExtMany(args.file, Static.commonImgFileExt))
+      return r.err({
+        name: "TRPCError",
+        code: "BAD_REQUEST",
+        message: "Invalid image file"
+      });
+
+    return uploadFile(args);
   }
 
   export const writeFile = async (name: string, file: File) => {

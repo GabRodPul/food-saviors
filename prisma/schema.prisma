@@ -29,42 +29,46 @@ model Post {
 
 /// TODO: add images
 model User {
-  id          Int        @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   /// @zod.string.email()
-  email       String
+  email String
 
   /// @zod.string.min(1).max(64)
-  name        String
+  name String
 
   /// @zod.date
-  dateOfBirth DateTime   @db.Date
+  dateOfBirth DateTime @db.Date
+
+  image String?
 
   /// Relations
-  businesses  Business[]
-  reviews     Review[]
-  purchases   Purchase[]
+  businesses Business[]
+  reviews    Review[]
+  purchases  Purchase[]
 }
 
 model Business {
-  id       Int       @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   /// @zod.string.min(1).max(64)
-  name     String
-  
+  name String
+
   /// @zod.string.min(1).max(255)
   location String
 
   /// @zod.enum
-  category     BusinessCategory
+  category BusinessCategory
+
+  image String?
 
   /// Relations
-  owner    User      @relation(fields: [ownerId], references: [id])
-  ownerId  Int
+  owner   User @relation(fields: [ownerId], references: [id])
+  ownerId Int
 
   products Product[]
 
-  reviews  Review[]
+  reviews Review[]
 }
 
 enum BusinessCategory {
@@ -90,10 +94,12 @@ model Product {
   price Decimal
 
   /// @zod.number.int().positive()
-  stock          Int
+  stock Int
 
   /// @zod.date
-  expirationDate DateTime  @db.Date
+  expirationDate DateTime @db.Date
+
+  image String?
 
   /// Relations
   seller   Business @relation(fields: [sellerId], references: [id])
@@ -104,6 +110,7 @@ model Product {
   purchases Purchase[]
 }
 
+/// @zod.import(["import { DecimalJsLikeSchema } from '@schemas/inputTypeSchemas/DecimalJsLikeSchema'"])
 model Purchase {
   id Int @id @default(autoincrement())
 
@@ -122,10 +129,10 @@ model Purchase {
 }
 
 model Review {
-  id   Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   /// @zod.date
-  date DateTime  @db.Date
+  date DateTime @db.Date
 
   text String
 
@@ -138,10 +145,10 @@ model Review {
 }
 
 model Allergen {
-  code     String            @id
+  code String @id
 
   /// @zod.string.min(1).max(64)
-  name     String
+  name String
 
   /// Relation
   products ProductAllergen[]
