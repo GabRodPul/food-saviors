@@ -32,9 +32,9 @@ model User {
   id Int @id @default(autoincrement())
 
   /// @zod.string.email()
-  email String
+  email String @unique
 
-  /// @zod.string({ required_error: "Password is required" }).min(1, { message: "Password is required" })
+  /// @zod.string.min(8).max(32)
   password String
 
   /// @zod.string.min(1).max(64)
@@ -55,11 +55,11 @@ model Business {
   /// @zod.string.min(1).max(64)
   name String
 
-  /// @zod.string.min(8).max(32)
-  password String
-
   /// @zod.string.min(1).max(255)
   location String
+
+  /// @zod.enum
+  category BusinessCategory
 
   /// Relations
   owner   User @relation(fields: [ownerId], references: [id])
@@ -68,6 +68,12 @@ model Business {
   products Product[]
 
   reviews Review[]
+}
+
+enum BusinessCategory {
+  RESTAURANT
+  BAKERY
+  GROCERY
 }
 
 /// NOTE: zod-prisma-types generator will just generate the files without checking
@@ -125,7 +131,8 @@ model Review {
   /// @zod.date
   date DateTime @db.Date
 
-  text String
+  /// @zod.string.max(65535)
+  text String @db.Text
 
   /// Relations
   user   User @relation(fields: [userId], references: [id])
