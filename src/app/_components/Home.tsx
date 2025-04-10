@@ -13,8 +13,8 @@ const Home: React.FC = () => {
         <HamburgerMenu />
       </nav>
 
-      <div className="flex h-[70vh] flex-col items-center justify-center px-12 pt-20 text-center text-white">
-        <h2 className="text-3xl leading-snug font-bold">
+      <div className="flex h-[70vh] flex-col items-center justify-center px-12 pt-20 text-white">
+        <h2 className="text-5xl leading-snug font-bold">
           Save Food.
           <br /> Save Money.
           <br /> Save the Planet.
