@@ -59,7 +59,7 @@ model Business {
   location String
 
   /// @zod.enum
-  category     BusinessCategory
+  category BusinessCategory
 
   /// Relations
   owner   User @relation(fields: [ownerId], references: [id])
@@ -107,6 +107,7 @@ model Product {
   purchases Purchase[]
 }
 
+/// @zod.import(["import { DecimalJsLikeSchema } from '@schemas/inputTypeSchemas/DecimalJsLikeSchema'"])
 model Purchase {
   id Int @id @default(autoincrement())
 
