@@ -1,5 +1,4 @@
 import { BusinessCategory, PrismaClient } from '@prisma/client'
-// import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
 
 const prisma = new PrismaClient()
 
@@ -30,9 +29,9 @@ async function main() {
   /// Seeding for users
   const users = await prisma.user.createMany({
     data: [
-      { id: 1, email: 'lucas@gmail.com', name: 'Lucas', dateOfBirth: new Date('2005-01-04') },
-      { id: 2, email: 'sophie@gmail.com', name: 'Sophie', dateOfBirth: new Date('1987-05-06') },
-      { id: 3, email: 'miguel@gmail.com', name: 'Miguel', dateOfBirth: new Date('2000-02-03') },
+      { id: 1, email: 'lucas@gmail.com', password: 'lucas1234', name: 'Lucas', dateOfBirth: new Date('2005-01-04') },
+      { id: 2, email: 'sophie@gmail.com', password: 'sophie1234', name: 'Sophie', dateOfBirth: new Date('1987-05-06') },
+      { id: 3, email: 'miguel@gmail.com', password: 'miguel1234', name: 'Miguel', dateOfBirth: new Date('2000-02-03') },
     ]
   })
 
@@ -55,8 +54,8 @@ async function main() {
   /// Seeding for reviews
   const reviews = await prisma.review.createMany({
     data: [
-      { date: new Date('2025-07-04'), text: "I really recommend Korienta's dishes", userId: 1, businessId: 1 },
-      { date: new Date('2025-06-04'), text: "Nothing to say, I loved it", userId: 2, businessId: 2 },
+      { date: new Date('2025-07-04'), text: "I really recommend Korienta's dishes", userId: 1, businessId: 1, rating: 3 },
+      { date: new Date('2025-06-04'), text: "Nothing to say, I loved it", userId: 2, businessId: 2, rating: 5 },
     ]
   })
 

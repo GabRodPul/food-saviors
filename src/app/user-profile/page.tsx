@@ -25,6 +25,10 @@ const UserProfile: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string>("");
   const [selectedYear, setSelectedYear] = useState<string>("");
 
+  const user = api.user.getOneById.useQuery({
+    id: +searchParams.get("userId")!
+  });
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
