@@ -15,7 +15,7 @@ export const userRouter = createTRPCRouter({
   create: publicProcedure
     .input(UserSchema.omit({ id: true }))
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.user.create({ data: input });
+      return ctx.db.user.create({ data: input as any });
     }),
 
   getOneById: publicProcedure
