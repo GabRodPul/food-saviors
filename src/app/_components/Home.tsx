@@ -9,7 +9,8 @@ const Home: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat">
       <nav className="fixed top-6 right-5 left-5 z-10 flex items-center justify-between rounded-xl bg-[#004D47]/50 p-4">
-        <h1 className="text-xl font-semibold text-white">Food Savers</h1>
+        {/* <h1 className="text-xl font-semibold text-white">Food Savers</h1> */}
+        <a href="/MainPage" className="text-xl font-semibold text-white"><h1>Food Saviors</h1></a>
         <HamburgerMenu />
       </nav>
 

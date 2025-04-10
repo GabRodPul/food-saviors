@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import HamburgerMenu from "../_components/HamburgerMenu";
 
 const UserProfile: React.FC = () => {
   const searchParams = useSearchParams();
@@ -37,7 +38,12 @@ const UserProfile: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-8">
+    <div className="min-h-screen bg-gray-50 px-4 pt-25 py-8">
+      <nav className="fixed top-6 right-5 left-5 z-10 flex items-center justify-between rounded-xl bg-[#004D47]/50 p-4">
+        {/* <h1 className="text-xl font-semibold text-white">Food Savers</h1> */}
+        <a href="/MainPage" className="text-xl font-semibold text-white"><h1>Food Saviors</h1></a>
+        <HamburgerMenu />
+      </nav>
       <div className="mx-auto max-w-screen-lg">
         {}
         <button

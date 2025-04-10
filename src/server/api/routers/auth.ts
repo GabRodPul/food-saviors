@@ -4,7 +4,6 @@ import {
   publicProcedure,
 } from "@food-saviors/server/api/trpc";
 
-// TODO: Implement allergen router
 import {
   UserSchema
 } from "@schemas/*";
