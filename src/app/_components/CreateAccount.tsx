@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const CreateAccount: React.FC = () => {
   const router = useRouter();
@@ -13,7 +14,8 @@ const CreateAccount: React.FC = () => {
           onClick={() => router.back()}
           className="mb-6 transition hover:opacity-70"
         >
-          <img src="/arrowback.svg" alt="Back" className="h-5 w-5" />
+          <Image src="/arrowdown.svg" alt="Back" width={32} height={32} />
+          {/*<img src="/arrowback.svg" alt="Back" className="h-5 w-5" />*/}
         </button>
 
         <h1 className="mb-8 text-center text-2xl font-bold text-[#004D47]">

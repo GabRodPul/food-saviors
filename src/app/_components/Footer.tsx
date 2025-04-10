@@ -6,7 +6,7 @@ import telegram from "public/icons/Telegram.svg";
 export default function Footer() {
   return (
     <>
-      <div className="flex w-full flex-col items-center bg-[#004D47] p-16 text-white">
+      <div className="flex w-full flex-col items-center bg-[#004D47] pt-16 pb-44 text-white">
         <div className="flex flex-col items-center">
           <h1 className="mb-3 text-2xl font-semibold">Food Savers</h1>
           <p className="mt-2 text-xl">About</p>

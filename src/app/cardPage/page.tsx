@@ -1,4 +1,9 @@
+import BakeriesButton from "../_components/BakeriesButton";
 import Card from "../_components/card";
+import Footer from "../_components/Footer";
+import GroceriesButton from "../_components/GroceriesButton";
+import NavBar from "../_components/NavBar";
+import RestaurantsButton from "../_components/RestaurantsButton";
 
 type BusinessCategory = "Restaurant" | "Bakery" | "Groceries";
 
@@ -74,11 +79,34 @@ const businesses: Business[] = [
 
 export default function CardPage() {
   return (
-    <div className="mx-16 my-32 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {businesses.map((buss) => {
-        const stars = Array.from({ length: 5 }, (_, i) => i < buss.numStars);
-        return <Card key={buss.id} buss={buss} stars={stars} />;
-      })}
-    </div>
+    <>
+      <NavBar />
+      <div className="mx-16 my-32 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {businesses.map((buss) => {
+          const stars = Array.from({ length: 5 }, (_, i) => i < buss.numStars);
+          return <Card key={buss.id} buss={buss} stars={stars} />;
+        })}
+
+        {/*
+         ------------------------------------------------
+          change this entire thing to the right component
+         ------------------------------------------------
+          */}
+        <div className="fixed right-0 bottom-5 left-0 flex justify-center">
+          <div className="flex space-x-4 rounded-lg bg-[#004D47]/50 p-6">
+            <RestaurantsButton />
+            <BakeriesButton />
+            <GroceriesButton />
+          </div>
+        </div>
+      </div>
+      {/*
+       ---------
+       To HERE!
+       ---------
+        */}
+
+      <Footer />
+    </>
   );
 }
