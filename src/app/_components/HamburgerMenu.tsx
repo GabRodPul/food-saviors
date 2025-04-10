@@ -31,7 +31,7 @@ const HamburgerMenu = () => {
             About
           </button>
           <button
-            onClick={() => handleNavigate("/food-groceries")}
+            onClick={() => handleNavigate("/cardPage")}
             className="block w-full px-4 py-2 text-left hover:bg-[#004D47]"
           >
             Food & Groceries

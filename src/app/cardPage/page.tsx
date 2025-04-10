@@ -92,7 +92,7 @@ export default function CardPage() {
           change this entire thing to the right component
          ------------------------------------------------
           */}
-        <div className="absolute right-0 bottom-5 left-0 flex justify-center">
+        <div className="fixed right-0 bottom-5 left-0 flex justify-center">
           <div className="flex space-x-4 rounded-lg bg-[#004D47]/50 p-6">
             <RestaurantsButton />
             <BakeriesButton />
