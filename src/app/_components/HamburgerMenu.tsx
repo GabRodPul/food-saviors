@@ -1,15 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsLoggedIn(pathname?.startsWith('/user-profile'));
+  }, [pathname]);
 
   const handleNavigate = (path: string) => {
     router.push(path);
     setIsOpen(false);
+  };
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user');
+    }
+    
+    setIsOpen(false);
+    
+    router.push('/MainPage');
   };
 
   return (
@@ -35,12 +51,21 @@ const HamburgerMenu = () => {
           >
             Food & Groceries
           </button>
-          <button
-            onClick={() => handleNavigate("/login")}
-            className="block w-full px-4 py-2 text-left hover:bg-[#004D47]"
-          >
-            Log In
-          </button>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="block w-full px-4 py-2 text-left hover:bg-[#004D47]"
+            >
+              Log Out
+            </button>
+          ) : (
+            <button
+              onClick={() => handleNavigate("/login")}
+              className="block w-full px-4 py-2 text-left hover:bg-[#004D47]"
+            >
+              Log In
+            </button>
+          )}
           <button
             onClick={() => handleNavigate("/contact")}
             className="block w-full px-4 py-2 text-left hover:bg-[#004D47]"
