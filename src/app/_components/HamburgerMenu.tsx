@@ -2,14 +2,15 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const handleNavigate = (path: string) => {
-    router.push(path);
     setIsOpen(false);
+    router.push(path);
   };
 
   return (
@@ -18,7 +19,7 @@ const HamburgerMenu = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="transition hover:opacity-70"
       >
-        <img src="/hamburgermenu.svg" alt="Menu" className="h-6 w-6" />
+        <Image src="/hamburgermenu.svg" alt="Menu" width={24} height={24} />
       </button>
 
       {isOpen && (
