@@ -12,5 +12,5 @@ services:
       - "3000:3000"
     image: t3-app
     environment:
-      - DATABASE_URL="mysql://root:697jdKvsAJFTCXlZ@localhost:3306/food-saviors"
+      - DATABASE_URL="mysql://root:password@localhost:3306/food-saviors"
       - JWT_SECRET="SUP3R_S3CR3T_64CH4R_TO_128CH4R_L0NG_S3CR3T_F0R_JS0N_W3B_T0K3N==="
