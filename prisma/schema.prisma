@@ -32,16 +32,17 @@ model User {
   id Int @id @default(autoincrement())
 
   /// @zod.string.email()
-  email String
+  email String @unique
+
+  /// @zod.string.min(8).max(32)
+  password String
 
   /// @zod.string.min(1).max(64)
   name String
 
   /// @zod.date
   dateOfBirth DateTime @db.Date
-
   image String?
-
   /// Relations
   businesses Business[]
   reviews    Review[]
@@ -59,7 +60,6 @@ model Business {
 
   /// @zod.enum
   category BusinessCategory
-
   image String?
 
   /// Relations
@@ -98,7 +98,6 @@ model Product {
 
   /// @zod.date
   expirationDate DateTime @db.Date
-
   image String?
 
   /// Relations
@@ -134,7 +133,11 @@ model Review {
   /// @zod.date
   date DateTime @db.Date
 
-  text String
+  /// @zod.string.max(65535)
+  text String @db.Text
+
+  /// @zod.number.min(1).max(5)
+  rating  Int
 
   /// Relations
   user   User @relation(fields: [userId], references: [id])

@@ -7,14 +7,15 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const Home: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat">
+    <div className="relative min-h-screen bg-black/50 bg-[url('/background.svg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
       <nav className="fixed top-6 right-5 left-5 z-10 flex items-center justify-between rounded-xl bg-[#004D47]/50 p-4">
-        <h1 className="text-xl font-semibold text-white">Food Savers</h1>
+        {/* <h1 className="text-xl font-semibold text-white">Food Savers</h1> */}
+        <a href="/MainPage" className="text-xl font-semibold text-white"><h1>Food Saviors</h1></a>
         <HamburgerMenu />
       </nav>
 
-      <div className="flex h-[70vh] flex-col items-center justify-center px-12 pt-20 text-center text-white">
-        <h2 className="text-3xl leading-snug font-bold">
+      <div className="flex h-[70vh] flex-col items-center justify-center px-12 pt-20 text-white">
+        <h2 className="text-5xl leading-snug font-bold">
           Save Food.
           <br /> Save Money.
           <br /> Save the Planet.
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
         <ArrowDownButton />
       </div>
 
-      <div className="absolute right-0 bottom-10 left-0 flex justify-center">
+      <div className="fixed right-0 bottom-10 left-0 z-10 flex justify-center">
         <div className="flex space-x-4 rounded-lg bg-[#004D47]/50 p-6">
           <RestaurantsButton />
           <BakeriesButton />
