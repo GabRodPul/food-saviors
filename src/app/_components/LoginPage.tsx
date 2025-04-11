@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
       setError(null);
 
       router.push(
-        `/user-profile?userName=${encodeURIComponent(data.data.user.name)}`,
+        `/user-profile?userName=${encodeURIComponent(data.data.user.id)}`,
       );
     },
     onError: (error) => {
@@ -66,7 +66,7 @@ const LoginPage: React.FC = () => {
             <label className="mb-1 block text-sm font-semibold">Email</label>
             <input
               type="email"
-              value={username}
+              value=""
               onChange={(e) => setUsername(e.target.value)}
               className="w-full rounded-md border border-[#009688] px-3 py-2 outline-none focus:ring-2 focus:ring-[#009688]"
             />
@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
             <label className="mb-1 block text-sm font-semibold">Password</label>
             <input
               type="password"
-              value={password}
+              value=""
               onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-md border border-[#009688] px-3 py-2 outline-none focus:ring-2 focus:ring-[#009688]"
             />

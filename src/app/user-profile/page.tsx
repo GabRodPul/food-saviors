@@ -4,22 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { api } from "@food-saviors/trpc/react";
-type UserData = {
-  userName: string;
-  recentItems: {
-    name: string;
-    category: string;
-    imageUrl: string;
-  }[];
-};
+import type { User } from "@schemas/*";
 
 const UserProfile: React.FC = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const [selectedWeek, setSelectedWeek] = useState<string>("");
   const [selectedMonth, setSelectedMonth] = useState<string>("");
@@ -28,25 +17,6 @@ const UserProfile: React.FC = () => {
   const user = api.user.getOneById.useQuery({
     id: +searchParams.get("userId")!
   });
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userNameFromUrl = searchParams.get("userName");
-
-        if (!response.ok) throw new Error("Failed to fetch user data");
-
-        const data = (await response.json()) as UserData;
-        setUserData(data);
-      } catch (err) {
-        setError("Something went wrong.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void fetchUserData();
-  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8">
@@ -63,15 +33,17 @@ const UserProfile: React.FC = () => {
           />
         </button>
 
-        {loading ? (
+        {user.isLoading && (
           <div className="flex h-[50vh] items-center justify-center font-semibold text-[#004D47]">
             Loading...
           </div>
-        ) : error ? (
+        )}
+        {user.isError && (
           <div className="flex h-[50vh] items-center justify-center font-semibold text-red-600">
-            {error}
+            {user.error.message}
           </div>
-        ) : (
+        )}
+        {user.data && (
           <>
             <div className="flex flex-col items-center justify-center text-center">
               <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#004D47] p-6 text-4xl text-white">
