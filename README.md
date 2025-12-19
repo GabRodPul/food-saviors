@@ -1,5 +1,5 @@
 # food-savers
-> .![NOTE]
+> ![NOTE]
 > This project was made as part of "Code Voyagers 3 The Sustainable Island", a project in which students from various places in Africa & Europe joined forces to create useful and sustainable applications to try and help make the world a better place.
 > <br/> It wouldn't have been completed without the work of all team members, so please make sure to check commits to get a general idea of what each of us did. 
 CodeVoyagers 3 - Group 9: Food Savers
