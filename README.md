@@ -1,7 +1,8 @@
-# food-savers
+# food-saviors
 > [!NOTE]
 > This project was made as part of "Code Voyagers 3 The Sustainable Island", a project in which students from various places in Africa & Europe joined forces to create useful and sustainable applications to try and help make the world a better place.
 > <br/> It wouldn't have been completed without the work of all team members, so please make sure to check commits to get a general idea of what each of us did.
+> <br/> The only modifications done to this project since March 2025 have been the addition of this note the 19th of December 2025.
 
 CodeVoyagers 3 - Group 9: Food Savers
 
